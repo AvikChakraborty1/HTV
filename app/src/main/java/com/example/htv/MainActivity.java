@@ -3,24 +3,61 @@ package com.example.htv;
 import androidx.appcompat.app.AppCompatActivity;
 import java.lang.Math;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView chalText1;
+    private TextView chalText2;
+    private TextView chalText3;
+    private TextView chalText4;
+    private TextView timer;
+
+    private Button button1;
+    private Button button2;
+    private Button button3;
+    private Button button4;
+
+    private CountDownTimer countDownTimer;
+    private long timeLeftInMili = 10000;
+    private boolean timerRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        chalText1 = findViewById(R.id.txtChal1);
+        chalText2 = findViewById(R.id.txtChal2);
+        chalText3 = findViewById(R.id.txtChal3);
+        chalText4 = findViewById(R.id.txtChal4);
+        timer = findViewById(R.id.txtTimer);
+        button1 = findViewById(R.id.btn1);
+        button2 = findViewById(R.id.btn2);
+        button3 = findViewById(R.id.btn3);
+        button4 = findViewById(R.id.btn4);
+        setChallenges();
+    }
+
+    public int random(int min, int max){
+        int range = max - min;
+        return (int)(Math.random()*range) + min;
+    }
+
+
+    public void setChallenges(){
         String [] challenges = new String[15];
         challenges[0] = "Run for 5 minutes";
         challenges[1] = "Do 30 jumping jacks";
-        challenges[2] = "Tell one friend or family member how much they mean to you";
+        challenges[2] = "Tell someone close how much you care for them";
         challenges[3] = "Do 10 push ups";
         challenges[4] = "prepare a nice meal";
-        challenges[5] = "smile to everyone you met today";
-        challenges[6] = "Do not drink any soda";
+        challenges[5] = "lie down and relax for 10 minutes";
+        challenges[6] = "Do a favour for someone";
         challenges[7] = "Enjoy at least an hour of time with your friends";
         challenges[8] = "Draw something";
         challenges[9] = "Plank for 30 seconds";
@@ -45,18 +82,70 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        TextView chalText1 = findViewById(R.id.txtChal1);
-        TextView chalText2 = findViewById(R.id.txtChal2);
-        TextView chalText3 = findViewById(R.id.txtChal3);
-        TextView chalText4 = findViewById(R.id.txtChal4);
         chalText1.setText(chosen[0]);
         chalText2.setText(chosen[1]);
         chalText3.setText(chosen[2]);
         chalText4.setText(chosen[3]);
+
+        View v1 = (View)button1;
+        View v2 = (View)button2;
+        View v3 = (View)button3;
+        View v4 = (View)button4;
+        v1.setEnabled(true);
+        v2.setEnabled(true);
+        v3.setEnabled(true);
+        v4.setEnabled(true);
+        String s = new String("Press when challenge completed");
+        button1.setText(s);
+        button2.setText(s);
+        button3.setText(s);
+        button4.setText(s);
+        timer.setVisibility(View.INVISIBLE);
+
+
+
     }
 
-    public int random(int min, int max){
-        int range = max - min;
-        return (int)(Math.random()*range) + min;
+
+    public void clickEvent(View v){
+        v.setEnabled(false);
+        Button button = (Button)v;
+        button.setText("Completed");
+
+        if(!button1.isEnabled() && !button2.isEnabled() && !button3.isEnabled() && !button4.isEnabled()){
+            timerRunning = true;
+            timer.setVisibility(View.VISIBLE);
+            startTimer();
+        }
+    }
+
+    public void startTimer(){
+        countDownTimer = new CountDownTimer(timeLeftInMili, 1000){
+            @Override
+            public void onTick(long millisUntilFinished) {
+                updateTimer();
+                timeLeftInMili = millisUntilFinished;
+            }
+
+            @Override
+            public void onFinish() {
+                timerRunning = false;
+                setChallenges();
+                timeLeftInMili = 10000;
+
+            }
+        }.start();
+    }
+
+    public void updateTimer(){
+        int minutes = (int)timeLeftInMili / 60000;
+        int seconds = (int)timeLeftInMili % 60000 / 1000;
+
+        String timeLeft = minutes + ":";
+        if(seconds<10)
+            timeLeft += "0";
+        timeLeft += seconds;
+        timer.setText("Time left untill new challenges " +timeLeft);
+
     }
 }
