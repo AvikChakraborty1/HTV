@@ -6,13 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="52dp"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/txtChal4"
+        app:layout_constraintTop_toBottomOf="@+id/btn3" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/txtChal2"
+        android:layout_width="139dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtChal1" />
+
+    <TextView
+        android:id="@+id/txtChal3"
+        android:layout_width="139dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtChal2" />
+
+    <TextView
+        android:id="@+id/txtChal4"
+        android:layout_width="139dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtChal3" />
+
+    <TextView
+        android:id="@+id/txtChallenges"
+        android:layout_width="144dp"
+        android:layout_height="50dp"
+        android:text="Challenges"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.211" />
+
+    <TextView
+        android:id="@+id/txtChal1"
+        android:layout_width="139dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtChallenges" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="56dp"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/txtChal1"
+        app:layout_constraintTop_toBottomOf="@+id/txtChallenges" />
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="52dp"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/txtChal2"
+        app:layout_constraintTop_toBottomOf="@+id/btn1" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="56dp"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/txtChal3"
+        app:layout_constraintTop_toBottomOf="@+id/btn2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
