@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         String [] challenges = new String[15];
         challenges[0] = "Run for 5 minutes";
         challenges[1] = "Do 30 jumping jacks";
@@ -30,13 +30,12 @@ public class MainActivity extends AppCompatActivity {
         challenges[13] = "Start/continue reading a book";
         challenges[14] = "Plan a trip with some friends";
 
-
         int i =0;
         String [] chosen = new String[4];
-        while(i <4){
+        while(i < 4){
             int x = random(0,challenges.length);
             boolean ableToAdd = true;
-            for(int j =0; i<chosen.length; j++){
+            for(int j = 0; j<chosen.length; j++){
                 if(challenges[x] == chosen[j])
                     ableToAdd = false;
             }
