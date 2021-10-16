@@ -6,15 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn4"
-        android:layout_width="98dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="52dp"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/txtChal4"
-        app:layout_constraintTop_toBottomOf="@+id/btn3" />
+    <TextView
+        android:id="@+id/txtChal1"
+        android:layout_width="139dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtChallenges" />
 
     <TextView
         android:id="@+id/txtChal2"
@@ -55,15 +54,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.211" />
 
-    <TextView
-        android:id="@+id/txtChal1"
-        android:layout_width="139dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtChallenges" />
-
     <Button
         android:id="@+id/btn1"
         android:layout_width="98dp"
@@ -93,5 +83,15 @@
         android:text="Button"
         app:layout_constraintStart_toEndOf="@+id/txtChal3"
         app:layout_constraintTop_toBottomOf="@+id/btn2" />
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="98dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="52dp"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/txtChal4"
+        app:layout_constraintTop_toBottomOf="@+id/btn3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

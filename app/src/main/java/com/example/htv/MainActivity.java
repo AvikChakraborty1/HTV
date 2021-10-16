@@ -3,6 +3,8 @@ package com.example.htv;
 import androidx.appcompat.app.AppCompatActivity;
 import java.lang.Math;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,8 +35,25 @@ public class MainActivity extends AppCompatActivity {
         String [] chosen = new String[4];
         while(i <4){
             int x = random(0,challenges.length);
-            if challenges[x]                                           //if challenges[x] is not already in array chosen, add it, if not then get another random number x
+            boolean ableToAdd = true;
+            for(int j =0; i<chosen.length; j++){
+                if(challenges[x] == chosen[j])
+                    ableToAdd = false;
+            }
+            if(ableToAdd){
+                chosen[i] = challenges[x];
+                i++;
+            }
         }
+
+        TextView chalText1 = findViewById(R.id.txtChal1);
+        TextView chalText2 = findViewById(R.id.txtChal2);
+        TextView chalText3 = findViewById(R.id.txtChal3);
+        TextView chalText4 = findViewById(R.id.txtChal4);
+        chalText1.setText(chosen[0]);
+        chalText2.setText(chosen[1]);
+        chalText3.setText(chosen[2]);
+        chalText4.setText(chosen[3]);
     }
 
     public int random(int min, int max){
