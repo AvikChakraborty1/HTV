@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button4;
 
     private CountDownTimer countDownTimer;
-    private long timeLeftInMili = 10000;
+    private long timeLeftInMili = 3599000;
     private boolean timerRunning;
     private Button button;
 
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                timeLeftInMili = 10000;
+                timeLeftInMili = 3599000;
 
             }
         }.start();
