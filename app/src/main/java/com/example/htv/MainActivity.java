@@ -1,17 +1,24 @@
 package com.example.htv;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.Math;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.os.Environment;
 import android.widget.Toast;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.util.Scanner;
+
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean timerRunning;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -44,11 +51,40 @@ public class MainActivity extends AppCompatActivity {
         button2 = findViewById(R.id.btn2);
         button3 = findViewById(R.id.btn3);
         button4 = findViewById(R.id.btn4);
-        try {
-            setChallenges();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        String fileName = "HTV_saved_data.txt";
+        String filePath = "HTV_DataDir";
+        String storageState = Environment.getExternalStorageState();
+        if (storageState.equals(Environment.MEDIA_MOUNTED)) {
+            File myDataFile = new File(getExternalFilesDir(filePath), fileName);
+            if (myDataFile.exists()){
+                Scanner dataReader = null;
+                try {
+                    dataReader = new Scanner(myDataFile);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                chalText1.setText(dataReader.nextLine());
+                chalText2.setText(dataReader.nextLine());
+                chalText3.setText(dataReader.nextLine());
+                chalText4.setText(dataReader.nextLine());
+                String s = new String("Press when challenge completed");
+                button1.setText(s);
+                button2.setText(s);
+                button3.setText(s);
+                button4.setText(s);
+                timer.setVisibility(View.INVISIBLE);
+            }else{
+                try {
+                    setChallenges();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
+
+
     }
 
     public int random(int min, int max){
@@ -57,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setChallenges() throws Exception{
-        String [] challenges = new String[15];
+    public void setChallenges() throws IOException {
+        String[] challenges = new String[15];
         challenges[0] = "Run for 5 minutes";
         challenges[1] = "Do 30 jumping jacks";
         challenges[2] = "Tell someone close how much you care for them";
@@ -75,16 +111,16 @@ public class MainActivity extends AppCompatActivity {
         challenges[13] = "Start/continue reading a book";
         challenges[14] = "Plan a trip with some friends";
 
-        int i =0;
-        String [] chosen = new String[4];
-        while(i < 4){
-            int x = random(0,challenges.length);
+        int i = 0;
+        String[] chosen = new String[4];
+        while (i < 4) {
+            int x = random(0, challenges.length);
             boolean ableToAdd = true;
-            for(int j = 0; j<chosen.length; j++){
-                if(challenges[x] == chosen[j])
+            for (int j = 0; j < chosen.length; j++) {
+                if (challenges[x] == chosen[j])
                     ableToAdd = false;
             }
-            if(ableToAdd){
+            if (ableToAdd) {
                 chosen[i] = challenges[x];
                 i++;
             }
@@ -95,10 +131,10 @@ public class MainActivity extends AppCompatActivity {
         chalText3.setText(chosen[2]);
         chalText4.setText(chosen[3]);
 
-        View v1 = (View)button1;
-        View v2 = (View)button2;
-        View v3 = (View)button3;
-        View v4 = (View)button4;
+        View v1 = (View) button1;
+        View v2 = (View) button2;
+        View v3 = (View) button3;
+        View v4 = (View) button4;
         v1.setEnabled(true);
         v2.setEnabled(true);
         v3.setEnabled(true);
@@ -110,10 +146,11 @@ public class MainActivity extends AppCompatActivity {
         button4.setText(s);
         timer.setVisibility(View.INVISIBLE);
 
+
         String fileName = "HTV_saved_data.txt";
         String filePath = "HTV_DataDir";
         String storageState = Environment.getExternalStorageState();
-        if(storageState.equals(Environment.MEDIA_MOUNTED)){       //only saves if there is external storage available
+        if (storageState.equals(Environment.MEDIA_MOUNTED)) {       //only saves if there is external storage available
             File myDataFile = new File(getExternalFilesDir(filePath), fileName);
             FileOutputStream myData = new FileOutputStream(myDataFile);
             myData.write((chosen[0] + "\n").getBytes());
@@ -121,11 +158,9 @@ public class MainActivity extends AppCompatActivity {
             myData.write((chosen[2] + "\n").getBytes());
             myData.write((chosen[3] + "\n").getBytes());
             Toast.makeText(MainActivity.this, "challenges have been saved", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             Toast.makeText(MainActivity.this, "Sorry, your challenges could not be saved", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
 
@@ -172,6 +207,5 @@ public class MainActivity extends AppCompatActivity {
             timeLeft += "0";
         timeLeft += seconds;
         timer.setText("Time left untill new challenges " +timeLeft);
-
     }
 }
