@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.os.Environment;
+import android.widget.Toast;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
         button2 = findViewById(R.id.btn2);
         button3 = findViewById(R.id.btn3);
         button4 = findViewById(R.id.btn4);
-        setChallenges();
+        try {
+            setChallenges();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int random(int min, int max){
@@ -49,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setChallenges(){
+    public void setChallenges() throws Exception{
         String [] challenges = new String[15];
         challenges[0] = "Run for 5 minutes";
         challenges[1] = "Do 30 jumping jacks";
@@ -102,6 +110,20 @@ public class MainActivity extends AppCompatActivity {
         button4.setText(s);
         timer.setVisibility(View.INVISIBLE);
 
+        String fileName = "HTV_saved_data.txt";
+        String filePath = "HTV_DataDir";
+        String storageState = Environment.getExternalStorageState();
+        if(storageState.equals(Environment.MEDIA_MOUNTED)){       //only saves if there is external storage available
+            File myDataFile = new File(getExternalFilesDir(filePath), fileName);
+            FileOutputStream myData = new FileOutputStream(myDataFile);
+            myData.write((chosen[0] + "\n").getBytes());
+            myData.write((chosen[1] + "\n").getBytes());
+            myData.write((chosen[2] + "\n").getBytes());
+            myData.write((chosen[3] + "\n").getBytes());
+            Toast.makeText(MainActivity.this, "challenges have been saved", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(MainActivity.this, "Sorry, your challenges could not be saved", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -130,7 +152,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timerRunning = false;
-                setChallenges();
+                try {
+                    setChallenges();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 timeLeftInMili = 10000;
 
             }
