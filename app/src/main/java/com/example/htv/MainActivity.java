@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long timeLeftInMili = 10000;
     private boolean timerRunning;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
         button2 = findViewById(R.id.btn2);
         button3 = findViewById(R.id.btn3);
         button4 = findViewById(R.id.btn4);
+
         try {
             setChallenges();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public int random(int min, int max){
@@ -175,4 +178,3 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
-
