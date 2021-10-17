@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private long timeLeftInMili = 10000;
     private boolean timerRunning;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
